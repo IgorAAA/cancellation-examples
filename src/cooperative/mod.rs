@@ -22,7 +22,7 @@ async fn cooperative_work(token: CancellationToken) -> String {
 }
 
 pub async fn run() {
-    println!("\n--- token ---");
+    println!("\n--- cooperative ---");
     let token = CancellationToken::new();
 
     let worker_token = token.clone(); // this clone can be canceled by cancelling `token` or directly
@@ -31,7 +31,7 @@ pub async fn run() {
     // Let it make some progress, then signal cancellation explicitly.
     sleep(Duration::from_millis(250)).await;
     println!("main: cancelling the token");
-    token.cancel(); // cancels the token and all its children as well!
+    token.cancel(); // cancels the token and all its clones as well!
 
     match handle.await {
         Ok(value) => println!("cooperative_work returned: {value}"),

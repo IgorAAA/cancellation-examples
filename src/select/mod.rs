@@ -14,7 +14,7 @@ pub async fn run() {
     });
 
     tokio::select! {
-        //`slow_work()` (5 seconds) races against a "stop" signal sent over a `oneshot`
+        // `slow_work()` (5 seconds) races against a "stop" signal sent over a `oneshot`
         // channel after 50ms. The stop signal wins, so `slow_work()` is dropped
         value = slow_work() => println!("slow_work completed with: {value}"),
         _ = &mut stop_rx => println!("slow_work was cancelled (stop signal won the race)"),
