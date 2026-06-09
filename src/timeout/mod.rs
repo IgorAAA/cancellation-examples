@@ -1,5 +1,5 @@
 use std::time::Duration;
-use tokio::time::{sleep, timeout};
+use tokio::time::timeout;
 use cancellation_examples::slow_work;
 
 pub async fn run() {
